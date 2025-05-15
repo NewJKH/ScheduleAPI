@@ -9,4 +9,5 @@ public class ScheduleRequest {
     private String memberName;
     private String title;
     private String content;
+
 }

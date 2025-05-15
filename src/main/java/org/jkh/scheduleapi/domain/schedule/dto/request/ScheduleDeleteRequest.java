@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class ScheduleDeleteRequest {
     private String memberName;
     private String title;
+
 }
