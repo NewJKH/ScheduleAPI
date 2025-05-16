@@ -30,4 +30,11 @@ public class ScheduleService {
                 .map(ScheduleResponse::toDTO)
                 .toList();
     }
+
+    public ScheduleResponse updateSchedule(String member_name, String title, String content) {
+        Schedule schedule = scheduleRepository.findByMemberName(member_name);
+        schedule.update(title,content);
+
+        return ScheduleResponse.toDTO(schedule);
+    }
 }

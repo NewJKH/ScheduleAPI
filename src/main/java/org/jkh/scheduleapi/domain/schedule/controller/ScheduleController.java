@@ -1,7 +1,7 @@
 package org.jkh.scheduleapi.domain.schedule.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jkh.scheduleapi.domain.schedule.dto.request.SchedulerCreateRequest;
+import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> save(@RequestBody SchedulerCreateRequest request){
+    public ResponseEntity<ScheduleResponse> save(@RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.save(request.member_name(),request.title(),request.content()));
@@ -29,10 +29,17 @@ public class ScheduleController {
                 .status(HttpStatus.OK)
                 .body(scheduleService.findByMemberName(username));
     }
-    @GetMapping("/schedule")
+    @GetMapping("/schedule/all")
     public ResponseEntity<List<ScheduleResponse>> find(){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.findAll());
+    }
+
+    @PutMapping("/schedule")
+    public ResponseEntity<ScheduleResponse> update(@RequestBody ScheduleRequest request){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(scheduleService.updateSchedule(request.member_name(),request.title(),request.content()));
     }
 }
