@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -26,5 +28,11 @@ public class ScheduleController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.findByMemberName(username));
+    }
+    @GetMapping("/schedule")
+    public ResponseEntity<List<ScheduleResponse>> find(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(scheduleService.findAll());
     }
 }

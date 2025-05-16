@@ -6,6 +6,8 @@ import org.jkh.scheduleapi.domain.schedule.entity.Schedule;
 import org.jkh.scheduleapi.domain.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -21,5 +23,11 @@ public class ScheduleService {
     public ScheduleResponse findByMemberName(String memberName) {
         Schedule schedule = scheduleRepository.findByMemberName(memberName);
         return ScheduleResponse.toDTO(schedule);
+    }
+
+    public List<ScheduleResponse> findAll() {
+        return scheduleRepository.findAll().stream()
+                .map(ScheduleResponse::toDTO)
+                .toList();
     }
 }
