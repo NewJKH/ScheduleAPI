@@ -6,10 +6,7 @@ import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -22,5 +19,12 @@ public class ScheduleController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.save(request.member_name(),request.title(),request.content()));
+    }
+
+    @GetMapping("/schedule")
+    public ResponseEntity<ScheduleResponse> find(@RequestParam String username){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(scheduleService.findByMemberName(username));
     }
 }

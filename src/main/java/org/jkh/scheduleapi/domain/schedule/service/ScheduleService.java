@@ -17,4 +17,9 @@ public class ScheduleService {
 
         return new ScheduleResponse(schedule.getMember_name(),schedule.getTitle(), schedule.getContent());
     }
+
+    public ScheduleResponse findByMemberName(String memberName) {
+        Schedule schedule = scheduleRepository.findByMemberName(memberName);
+        return ScheduleResponse.toDTO(schedule);
+    }
 }
