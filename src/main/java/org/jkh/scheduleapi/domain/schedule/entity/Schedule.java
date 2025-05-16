@@ -1,18 +1,32 @@
 package org.jkh.scheduleapi.domain.schedule.entity;
 
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.jkh.scheduleapi.common.entity.BaseDate;
 
-import java.util.Date;
-
+@Table(name = "schedules")
+@Entity
 @Getter
-@AllArgsConstructor
-public class Schedule {
-    private String memberName;
+@NoArgsConstructor
+public class Schedule extends BaseDate {
+
+    @Id
+    @Column(length = 20, nullable = false)
+    private String member_name;
+
+    @Column(length = 20, nullable = false)
     private String title;
+    @Column(columnDefinition = "longtext", nullable = false)
     private String content;
 
-    private Date createdAt;
-    private Date modifiedAt;
+    public Schedule(String member_name, String title, String content) {
+        this.member_name = member_name;
+        this.title = title;
+        this.content = content;
+    }
 }
