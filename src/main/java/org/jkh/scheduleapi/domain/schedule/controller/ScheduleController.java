@@ -1,6 +1,7 @@
 package org.jkh.scheduleapi.domain.schedule.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleDeleteRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.service.ScheduleService;
@@ -42,4 +43,11 @@ public class ScheduleController {
                 .status(HttpStatus.OK)
                 .body(scheduleService.updateSchedule(request.member_name(),request.title(),request.content()));
     }
+
+    @DeleteMapping("/schedule")
+    public ResponseEntity<Void> delete(@RequestBody ScheduleDeleteRequest request){
+        scheduleService.delete(request.member_name(),request.title());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
