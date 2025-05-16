@@ -20,7 +20,7 @@ public class ScheduleService {
         Schedule schedule = new Schedule(member_name,title,content);
         scheduleRepository.save(schedule);
 
-        return new ScheduleResponse(schedule.getMember_name(),schedule.getTitle(), schedule.getContent());
+        return ScheduleResponse.toDTO(schedule);
     }
 
     public ScheduleResponse findByMemberName(String memberName) {
