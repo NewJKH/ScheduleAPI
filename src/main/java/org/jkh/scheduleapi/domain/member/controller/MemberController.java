@@ -3,6 +3,7 @@ package org.jkh.scheduleapi.domain.member.controller;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.dto.MemberSignUpRequest;
+import org.jkh.scheduleapi.domain.member.dto.MemberUpdateRequest;
 import org.jkh.scheduleapi.domain.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,12 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.findAll());
+    }
+
+    @PutMapping("/members")
+    public ResponseEntity<MemberResponse> update(@RequestBody MemberUpdateRequest request){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberService.updateMemberName(request.id(),request.member_name()));
     }
 }

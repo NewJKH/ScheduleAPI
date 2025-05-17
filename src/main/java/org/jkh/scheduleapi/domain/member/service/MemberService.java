@@ -1,5 +1,6 @@
 package org.jkh.scheduleapi.domain.member.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.entity.Member;
@@ -29,4 +30,10 @@ public class MemberService {
                 .toList();
     }
 
+    @Transactional
+    public MemberResponse updateMemberName(Long id, String member_name){
+        Member member = memberRepository.findByIdOrThrow(id);
+        member.setMemberName(member_name);
+        return MemberResponse.toDto(member);
+    }
 }
