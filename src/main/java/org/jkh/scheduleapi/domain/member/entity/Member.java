@@ -18,6 +18,9 @@ public class Member extends BaseDate {
     private Long id;
 
     @Column(length = 20, nullable = false)
+    private String password;
+
+    @Column(length = 20, nullable = false)
     private String member_name;
 
     @Email
