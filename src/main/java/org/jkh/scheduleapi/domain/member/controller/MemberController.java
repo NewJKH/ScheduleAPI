@@ -1,6 +1,7 @@
 package org.jkh.scheduleapi.domain.member.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.domain.member.dto.MemberDeleteRequest;
 import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.dto.MemberSignUpRequest;
 import org.jkh.scheduleapi.domain.member.dto.MemberUpdateRequest;
@@ -43,5 +44,11 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.updateMemberName(request.id(),request.member_name()));
+    }
+
+    @DeleteMapping("/members")
+    public ResponseEntity<Void> delete(@RequestBody MemberDeleteRequest request){
+        memberService.deleteMember(request.id());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

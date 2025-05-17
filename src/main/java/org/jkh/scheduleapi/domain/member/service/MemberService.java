@@ -36,4 +36,9 @@ public class MemberService {
         member.setMemberName(member_name);
         return MemberResponse.toDto(member);
     }
+
+    public void deleteMember(Long id){
+        Member member = memberRepository.findByIdOrThrow(id);
+        memberRepository.delete(member);
+    }
 }
