@@ -6,6 +6,8 @@ import org.jkh.scheduleapi.domain.member.entity.Member;
 import org.jkh.scheduleapi.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -16,4 +18,15 @@ public class MemberService {
         memberRepository.save(member);
         return MemberResponse.toDto(member);
     }
+
+    public MemberResponse findById(Long id){
+        return MemberResponse.toDto(memberRepository.findByIdOrThrow(id));
+    }
+
+    public List<MemberResponse> findAll(){
+        return memberRepository.findAll().stream()
+                .map(MemberResponse::toDto)
+                .toList();
+    }
+
 }
