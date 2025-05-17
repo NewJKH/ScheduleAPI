@@ -1,0 +1,34 @@
+package org.jkh.scheduleapi.domain.member.entity;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.jkh.scheduleapi.common.entity.BaseDate;
+
+@Table(name = "members")
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Member extends BaseDate {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length = 20, nullable = false)
+    private String member_name;
+
+    @Email
+    private String email;
+
+    public Member(String member_name, String email) {
+        this.member_name = member_name;
+        this.email = email;
+    }
+
+    public void setMemberName(String memberName) {
+        this.member_name = memberName;
+    }
+}
