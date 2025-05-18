@@ -26,9 +26,10 @@ public class Member extends BaseDate {
     @Email
     private String email;
 
-    public Member(String member_name, String email) {
+    public Member(String member_name, String email, String password) {
         this.member_name = member_name;
         this.email = email;
+        this.password = password;
     }
 
     public void setMemberName(String memberName) {
