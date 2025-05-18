@@ -48,7 +48,7 @@ public class MemberService {
     public MemberResponse login(@Email String email, String password) {
         Member member = memberRepository.findByEmailOrThrow(email);
         if ( !member.getPassword().equals(password)){
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE," 비밀번호가 일치하지 않습니다. ");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED," 비밀번호가 일치하지 않습니다. ");
         }
         return MemberResponse.toDto(member);
     }
