@@ -22,7 +22,7 @@ public class MemberController {
     public ResponseEntity<MemberResponse> create(@RequestBody MemberSignUpRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(memberService.signUp(request.member_name(),request.email()));
+                .body(memberService.signUp(request.member_name(),request.email(),request.password()));
     }
 
     @GetMapping("/members")
