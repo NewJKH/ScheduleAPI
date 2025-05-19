@@ -8,6 +8,7 @@ import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class LoginController {
 
 
     @PostMapping
-    public ResponseEntity<MemberResponse> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+    public ResponseEntity<MemberResponse> login(@Validated @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         MemberResponse memberResponse = memberService.login(request.email(), request.password());
         sessionService.save(httpRequest, memberResponse);
 

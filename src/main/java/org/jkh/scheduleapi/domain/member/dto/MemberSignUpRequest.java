@@ -1,4 +1,13 @@
 package org.jkh.scheduleapi.domain.member.dto;
 
-public record MemberSignUpRequest(String member_name, String email,String password) {
-}
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+
+public record MemberSignUpRequest(
+        //TODO : 고도화(검증 그룹) 작업
+        @Length(min = 1, max = 4)
+        String member_name,
+        @Pattern(regexp = "^[\\w!#$%&'*+/=?`{|}~^.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
+        String email,
+        @Length(min = 1, max = 16)
+        String password) { }

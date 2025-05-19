@@ -7,6 +7,7 @@ import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,14 +19,14 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> save(@RequestBody ScheduleRequest request){
+    public ResponseEntity<ScheduleResponse> save(@Validated @RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.save(request.member_name(),request.title(),request.content()));
     }
 
     @GetMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> find(@RequestParam String username){
+    public ResponseEntity<ScheduleResponse> find(@Validated @RequestParam String username){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.findByMemberName(username));
@@ -38,14 +39,14 @@ public class ScheduleController {
     }
 
     @PutMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> update(@RequestBody ScheduleRequest request){
+    public ResponseEntity<ScheduleResponse> update(@Validated @RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(scheduleService.updateSchedule(request.member_name(),request.title(),request.content()));
     }
 
     @DeleteMapping("/schedule")
-    public ResponseEntity<Void> delete(@RequestBody ScheduleDeleteRequest request){
+    public ResponseEntity<Void> delete(@Validated @RequestBody ScheduleDeleteRequest request){
         scheduleService.delete(request.member_name(),request.title());
         return new ResponseEntity<>(HttpStatus.OK);
     }

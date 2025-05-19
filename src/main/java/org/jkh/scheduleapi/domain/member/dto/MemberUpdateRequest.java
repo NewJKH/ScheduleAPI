@@ -1,4 +1,8 @@
 package org.jkh.scheduleapi.domain.member.dto;
 
-public record MemberUpdateRequest(Long id,String member_name) {
-}
+import org.hibernate.validator.constraints.Length;
+
+public record MemberUpdateRequest(
+        Long id,
+        @Length(min = 1, max = 4)
+        String member_name) { }

@@ -1,4 +1,10 @@
 package org.jkh.scheduleapi.domain.schedule.dto.request;
 
-public record ScheduleDeleteRequest (String member_name, String title){
+import org.hibernate.validator.constraints.Length;
+
+public record ScheduleDeleteRequest (
+        @Length(min = 1, max = 4)
+        String member_name,
+        @Length(min = 1, max = 10)
+        String title){
 }
