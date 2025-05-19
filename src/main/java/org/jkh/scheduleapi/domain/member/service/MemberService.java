@@ -3,6 +3,7 @@ package org.jkh.scheduleapi.domain.member.service;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.common.config.PasswordEncoder;
 import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.entity.Member;
 import org.jkh.scheduleapi.domain.member.repository.MemberRepository;
@@ -16,9 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder encoder;
 
     public MemberResponse signUp(String member_name, String email, String password){
-        Member member = new Member(member_name, email, password);
+        Member member = new Member(member_name, email, encoder.encode(password));
         memberRepository.save(member);
         return MemberResponse.toDto(member);
     }
@@ -47,7 +49,7 @@ public class MemberService {
 
     public MemberResponse login(@Email String email, String password) {
         Member member = memberRepository.findByEmailOrThrow(email);
-        if ( !member.getPassword().equals(password)){
+        if (!encoder.matches(password,member.getPassword())){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED," 비밀번호가 일치하지 않습니다. ");
         }
         return MemberResponse.toDto(member);
