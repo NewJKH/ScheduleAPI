@@ -1,4 +1,4 @@
-Lv 2 회원 API 명세서
+Lv 7 댓글 API 명세서
 
 ## ERD 다이어그램
 ![img.png](img.png)
