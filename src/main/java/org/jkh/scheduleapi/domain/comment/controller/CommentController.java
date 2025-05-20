@@ -3,6 +3,7 @@ package org.jkh.scheduleapi.domain.comment.controller;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.comment.dto.CommentRequest;
 import org.jkh.scheduleapi.domain.comment.dto.CommentResponse;
+import org.jkh.scheduleapi.domain.comment.dto.CommentUpdateRequest;
 import org.jkh.scheduleapi.domain.comment.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,4 +37,12 @@ public class CommentController {
                 .status(HttpStatus.OK)
                 .body(commentService.getAllCommentsByScheduleId(id));
     }
+
+    @PutMapping
+    public ResponseEntity<CommentResponse> update(@RequestBody CommentUpdateRequest request){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(commentService.updateComment(request.id(), request.schedule_id(),request.member_id(),request.message()));
+    }
+
 }
