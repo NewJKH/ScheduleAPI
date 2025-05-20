@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class LoginFilter implements Filter {
 
-    private static final String[] WHITE_LIST = {"/login","/api/members"};
+    private static final String[] WHITE_LIST = {"/login","/api/members","/comment","/comment/*","/api/schedule"};
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
