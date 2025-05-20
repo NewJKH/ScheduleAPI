@@ -24,7 +24,7 @@ public class ScheduleService {
     }
 
     public ScheduleResponse findByMemberName(String memberName) {
-        Schedule schedule = scheduleRepository.findByMemberName(memberName);
+        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(memberName);
         return ScheduleResponse.toDTO(schedule);
     }
 
@@ -36,7 +36,7 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleResponse updateSchedule(String member_name, String title, String content) {
-        Schedule schedule = scheduleRepository.findByMemberName(member_name);
+        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(member_name);
         schedule.update(title,content);
 
         return ScheduleResponse.toDTO(schedule);
@@ -44,7 +44,7 @@ public class ScheduleService {
 
     @Transactional
     public void delete(String member_name, String title) {
-        Schedule schedule = scheduleRepository.findByMemberName(member_name);
+        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(member_name);
 
         if ( !schedule.getTitle().equals(title)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST," 제목이 일치하지 않습니다. ");
