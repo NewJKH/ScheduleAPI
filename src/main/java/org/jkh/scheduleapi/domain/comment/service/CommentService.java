@@ -56,4 +56,11 @@ public class CommentService {
         return CommentResponse.toDto(comment);
     }
 
+    public void deleteComment(Long id, Long member_id){
+        Comment comment = commentRepository.findByIdOrThrow(id);
+        if ( comment.getMember().getId() != member_id.longValue()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"유저가 일치하지 않습니다.");
+        }
+        commentRepository.delete(comment);
+    }
 }

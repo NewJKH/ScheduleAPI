@@ -1,6 +1,7 @@
 package org.jkh.scheduleapi.domain.comment.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.domain.comment.dto.CommentDeleteRequest;
 import org.jkh.scheduleapi.domain.comment.dto.CommentRequest;
 import org.jkh.scheduleapi.domain.comment.dto.CommentResponse;
 import org.jkh.scheduleapi.domain.comment.dto.CommentUpdateRequest;
@@ -45,4 +46,9 @@ public class CommentController {
                 .body(commentService.updateComment(request.id(), request.schedule_id(),request.member_id(),request.message()));
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestBody CommentDeleteRequest request){
+        commentService.deleteComment(request.id(), request.member_id());
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
