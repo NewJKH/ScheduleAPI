@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.entity.Schedule;
 import org.jkh.scheduleapi.domain.schedule.repository.ScheduleRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +31,9 @@ public class ScheduleService {
         return ScheduleResponse.toDTO(schedule);
     }
 
-    public List<ScheduleResponse> findAll() {
-        return scheduleRepository.findAll().stream()
+    public List<ScheduleResponse> findAll(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createAt"));
+        return scheduleRepository.findAll(pageable).stream()
                 .map(ScheduleResponse::toDTO)
                 .toList();
     }

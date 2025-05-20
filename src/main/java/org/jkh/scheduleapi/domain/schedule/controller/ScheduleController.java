@@ -31,11 +31,14 @@ public class ScheduleController {
                 .status(HttpStatus.OK)
                 .body(scheduleService.findByMemberName(username));
     }
+
     @GetMapping("/schedule/all")
-    public ResponseEntity<List<ScheduleResponse>> find(){
+    public ResponseEntity<List<ScheduleResponse>> find(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.findAll());
+                .body(scheduleService.findAll(page,size));
     }
 
     @PutMapping("/schedule")
