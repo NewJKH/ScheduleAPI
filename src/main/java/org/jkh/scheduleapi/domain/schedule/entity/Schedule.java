@@ -18,7 +18,7 @@ public class Schedule extends BaseDate {
     private Long id;
 
     @Column(length = 20, nullable = false)
-    private String member_name;
+    private String memberName;
 
     @Column(length = 20, nullable = false)
     private String title;
@@ -26,7 +26,7 @@ public class Schedule extends BaseDate {
     private String content;
 
     public Schedule(String member_name, String title, String content) {
-        this.member_name = member_name;
+        this.memberName = member_name;
         this.title = title;
         this.content = content;
     }

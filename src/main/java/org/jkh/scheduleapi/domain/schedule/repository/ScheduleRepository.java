@@ -8,10 +8,10 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
-    Optional<Schedule> findByMembername(String memberName);
+    Optional<Schedule> findByMemberName(String memberName);
 
     default Schedule findByMemberNameOrThrow(String member_name){
-        return this.findByMembername(member_name)
+        return this.findByMemberName(member_name)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND," 유저를 찾을 수 없습니다"));
     }
 
