@@ -15,6 +15,7 @@ import org.jkh.scheduleapi.common.entity.BaseDate;
 public class Member extends BaseDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(length = 100, nullable = false)

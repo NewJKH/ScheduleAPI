@@ -14,6 +14,7 @@ public class Schedule extends BaseDate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "schedule_id")
     private Long id;
 
     @Column(length = 20, nullable = false)
