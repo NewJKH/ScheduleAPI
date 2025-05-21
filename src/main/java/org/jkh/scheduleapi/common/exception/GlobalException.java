@@ -57,20 +57,6 @@ public class GlobalException {
     }
 
     /**
-     * 사용자가 입력한 비밀번호가 일치하지 않을 때 발생하는 예외를 처리합니다.
-     *
-     * 이는 클라이언트의 입력 오류이므로 HTTP 400 (Bad Request)를 반환하며,
-     * 사용자 인증 흐름에서 명확한 피드백을 제공합니다.
-     *
-     * @param e NotMatchedPasswordException 예외 인스턴스
-     * @return 400 Bad Request + 예외 메시지
-     */
-    @ExceptionHandler(NotMatchedPasswordException.class)
-    public ResponseEntity<String> handlePwNotMatched(NotMatchedPasswordException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
-
-    /**
      * 인증된 사용자와 요청을 수행하려는 사용자가 일치하지 않을 경우 발생하는 예외입니다.
      *
      * 사용자의 권한 범위를 벗어난 요청이므로, HTTP 400 (Bad Request)를 사용하여
