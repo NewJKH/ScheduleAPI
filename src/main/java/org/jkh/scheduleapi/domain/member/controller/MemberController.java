@@ -41,14 +41,14 @@ public class MemberController {
     }
 
     @PutMapping("/member/update/{id}")
-    public ResponseEntity<MemberResponse> update(@Validated @PathVariable long id, @Validated @RequestBody MemberUpdateRequest request){
+    public ResponseEntity<MemberResponse> update(@PathVariable long id, @Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.updateMemberName(id, request.memberName()));
     }
 
     @DeleteMapping("/member/delete/{id}")
-    public ResponseEntity<Void> delete(@Validated @PathVariable long id,@Validated @RequestBody MemberDeleteRequest request){
+    public ResponseEntity<Void> delete(@PathVariable long id, @Validated @RequestBody MemberDeleteRequest request){
         memberService.deleteMember(id,request.password());
         return new ResponseEntity<>(HttpStatus.OK);
     }
