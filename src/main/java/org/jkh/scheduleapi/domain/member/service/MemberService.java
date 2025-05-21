@@ -4,12 +4,11 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.common.config.PasswordEncoder;
+import org.jkh.scheduleapi.common.exception.login.NotMatchedPasswordException;
 import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
 import org.jkh.scheduleapi.domain.member.entity.Member;
 import org.jkh.scheduleapi.domain.member.repository.MemberRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class MemberService {
     public MemberResponse login(@Email String email, String password) {
         Member member = memberRepository.findByEmailOrThrow(email);
         if (!encoder.matches(password,member.getPassword())){
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED," 비밀번호가 일치하지 않습니다. ");
+            throw new NotMatchedPasswordException();
         }
         return MemberResponse.toDto(member);
     }

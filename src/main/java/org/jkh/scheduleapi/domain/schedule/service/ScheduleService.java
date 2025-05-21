@@ -1,16 +1,15 @@
 package org.jkh.scheduleapi.domain.schedule.service;
 
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotMatchedException;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.entity.Schedule;
 import org.jkh.scheduleapi.domain.schedule.repository.ScheduleRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findByMemberNameOrThrow(member_name);
 
         if ( !schedule.getTitle().equals(title)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST," 제목이 일치하지 않습니다. ");
+            throw new ScheduleNotMatchedException();
         }
         scheduleRepository.delete(schedule);
     }
