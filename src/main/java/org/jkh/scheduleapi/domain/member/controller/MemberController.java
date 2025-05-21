@@ -19,7 +19,7 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping("/members")
+    @PostMapping("/members/register")
     public ResponseEntity<MemberResponse> create(@Validated @RequestBody MemberSignUpRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

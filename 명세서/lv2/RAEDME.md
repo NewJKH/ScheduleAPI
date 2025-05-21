@@ -7,24 +7,26 @@ Lv 2 회원 API 명세서
 ## 회원 생성 (회원가입)
 
 | 항목             | 내용                             |
-|------------------|----------------------------------|
-| **Method**       | `POST`                           |
-| **URL**          | `{{url}}/api/members`            |
-| **설명**         | 새로운 회원을 등록합니다.         |
-| **Request Body** | JSON (application/json)          |
+|------------------|--------------------------------|
+| **Method**       | `POST`                         |
+| **URL**          | `{{url}}/api/members/register` |
+| **설명**         | 새로운 회원을 등록합니다.                 |
+| **Request Body** | JSON (application/json)        |
 
 ### 자료형
 
-| 필드명       | 타입     | 필수 | 설명         |
-|--------------|----------|----|--------------|
-| member_name  | String   | O  | 회원 이름     |
-| email        | String   | X  | 회원 이메일    |
+| 필드명         | 타입     | 필수 | 설명      |
+|-------------|----------|----|---------|
+| member_name | String   | O  | 회원 이름   |
+| email       | String   | O  | 회원 이메일  |
+| password    | String   | O  | 회원 비밀번호 |
 
 ### 요청 예시
 ```json
 {
   "member_name": "홍길동",
-  "email": "1234@gmail.com"
+  "email": "abc@gmail.com",
+  "password": "abcd"
 }
 ```
 ### 응답 예시
@@ -32,9 +34,9 @@ Lv 2 회원 API 명세서
 {
   "id": 1,
   "member_name": "홍길동",
-  "email": "1234@gmail.com",
-  "createAt": "2025-05-17T07:23:36.864+00:00",
-  "modifiedAt": "2025-05-17T07:23:36.864+00:00"
+  "email": "abc@gmail.com",
+  "create_at": "2025-05-21T04:27:26.942+00:00",
+  "modified_at": "2025-05-21T04:27:26.942+00:00"
 }
 ```
 ### 상태코드
