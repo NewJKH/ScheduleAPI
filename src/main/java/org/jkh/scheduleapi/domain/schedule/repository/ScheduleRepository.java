@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
     Optional<Schedule> findByMemberName(String memberName);
 
-    default Schedule findByMemberNameOrThrow(String member_name){
-        return this.findByMemberName(member_name)
+    default Schedule findByMemberNameOrThrow(String memberName){
+        return this.findByMemberName(memberName)
                 .orElseThrow(MemberNotFoundException::new);
     }
 

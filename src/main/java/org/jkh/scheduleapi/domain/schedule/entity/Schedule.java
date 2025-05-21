@@ -33,8 +33,8 @@ public class Schedule extends BaseDate {
     private List<Comment> comments = new ArrayList<>();
 
 
-    public Schedule(String member_name, String title, String content) {
-        this.memberName = member_name;
+    public Schedule(String memberName, String title, String content) {
+        this.memberName = memberName;
         this.title = title;
         this.content = content;
     }

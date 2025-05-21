@@ -22,7 +22,7 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponse> save(@Validated @RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.save(request.member_name(),request.title(),request.content()));
+                .body(scheduleService.save(request.memberName(),request.title(),request.content()));
     }
 
     @GetMapping("/schedule")
@@ -45,12 +45,12 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponse> update(@Validated @RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.updateSchedule(request.member_name(),request.title(),request.content()));
+                .body(scheduleService.updateSchedule(request.memberName(),request.title(),request.content()));
     }
 
     @DeleteMapping("/schedule")
     public ResponseEntity<Void> delete(@Validated @RequestBody ScheduleDeleteRequest request){
-        scheduleService.delete(request.member_name(),request.title());
+        scheduleService.delete(request.memberName(),request.title());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

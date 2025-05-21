@@ -18,8 +18,8 @@ import java.util.List;
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
-    public ScheduleResponse save(String member_name, String title, String content) {
-        Schedule schedule = new Schedule(member_name,title,content);
+    public ScheduleResponse save(String memberName, String title, String content) {
+        Schedule schedule = new Schedule(memberName,title,content);
         scheduleRepository.save(schedule);
 
         return ScheduleResponse.toDTO(schedule);
@@ -38,16 +38,16 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleResponse updateSchedule(String member_name, String title, String content) {
-        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(member_name);
+    public ScheduleResponse updateSchedule(String memberName, String title, String content) {
+        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(memberName);
         schedule.update(title,content);
 
         return ScheduleResponse.toDTO(schedule);
     }
 
     @Transactional
-    public void delete(String member_name, String title) {
-        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(member_name);
+    public void delete(String memberName, String title) {
+        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(memberName);
 
         if ( !schedule.getTitle().equals(title)){
             throw new ScheduleNotMatchedException();

@@ -23,7 +23,7 @@ public class MemberController {
     public ResponseEntity<MemberResponse> create(@Validated @RequestBody MemberSignUpRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(memberService.signUp(request.member_name(),request.email(),request.password()));
+                .body(memberService.signUp(request.memberName(),request.email(),request.password()));
     }
 
     @GetMapping("/members")
@@ -44,7 +44,7 @@ public class MemberController {
     public ResponseEntity<MemberResponse> update(@Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(memberService.updateMemberName(request.id(),request.member_name()));
+                .body(memberService.updateMemberName(request.id(),request.memberName()));
     }
 
     @DeleteMapping("/members")

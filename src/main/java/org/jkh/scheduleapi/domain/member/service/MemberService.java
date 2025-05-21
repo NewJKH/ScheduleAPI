@@ -18,8 +18,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder encoder;
 
-    public MemberResponse signUp(String member_name, String email, String password){
-        Member member = new Member(member_name, email, encoder.encode(password));
+    public MemberResponse signUp(String memberName, String email, String password){
+        Member member = new Member(memberName, email, encoder.encode(password));
         memberRepository.save(member);
         return MemberResponse.toDto(member);
     }
@@ -35,9 +35,9 @@ public class MemberService {
     }
 
     @Transactional
-    public MemberResponse updateMemberName(Long id, String member_name){
+    public MemberResponse updateMemberName(Long id, String memberName){
         Member member = memberRepository.findByIdOrThrow(id);
-        member.setMemberName(member_name);
+        member.setMemberName(memberName);
         return MemberResponse.toDto(member);
     }
 

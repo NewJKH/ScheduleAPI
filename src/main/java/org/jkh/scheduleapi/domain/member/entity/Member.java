@@ -26,7 +26,7 @@ public class Member extends BaseDate {
     private String password;
 
     @Column(length = 20, nullable = false)
-    private String member_name;
+    private String memberName;
 
     @Email
     private String email;
@@ -34,13 +34,13 @@ public class Member extends BaseDate {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    public Member(String member_name, String email, String password) {
-        this.member_name = member_name;
+    public Member(String memberName, String email, String password) {
+        this.memberName = memberName;
         this.email = email;
         this.password = password;
     }
 
     public void setMemberName(String memberName) {
-        this.member_name = memberName;
+        this.memberName = memberName;
     }
 }

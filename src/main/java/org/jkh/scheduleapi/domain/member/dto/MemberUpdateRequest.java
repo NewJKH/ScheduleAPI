@@ -5,4 +5,4 @@ import org.hibernate.validator.constraints.Length;
 public record MemberUpdateRequest(
         Long id,
         @Length(min = 1, max = 4)
-        String member_name) { }
+        String memberName) { }
