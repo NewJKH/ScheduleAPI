@@ -181,7 +181,7 @@ PUT {{url}}/api/members/update/1
 
 
 ### 요청 예시
-DELETE {{url}}/api/members/update/1
+DELETE {{url}}/api/members/delete/1
 ```json
 {
   "password": "1234"
