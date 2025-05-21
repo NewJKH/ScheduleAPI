@@ -1,5 +1,7 @@
 package org.jkh.scheduleapi.common.exception;
 
+import org.jkh.scheduleapi.common.exception.comment.CommentNotFoundException;
+import org.jkh.scheduleapi.common.exception.login.LoginRequiredException;
 import org.jkh.scheduleapi.common.exception.login.NotMatchedPasswordException;
 import org.jkh.scheduleapi.common.exception.member.MemberNotFoundException;
 import org.jkh.scheduleapi.common.exception.member.MemberNotMatchedException;
@@ -80,6 +82,48 @@ public class GlobalException {
     @ExceptionHandler(MemberNotMatchedException.class)
     public ResponseEntity<String> handleMemberNotMatched(MemberNotMatchedException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    /**
+     * 로그인하지 않은 사용자가 인증이 필요한 요청을 시도할 때 발생하는 예외입니다.
+     *
+     * 인증 정보가 없으므로, HTTP 401 (Unauthorized)를 통해
+     * 로그인이 필요함을 클라이언트에 알립니다.
+     *
+     * @param e LoginRequiredException 예외 인스턴스
+     * @return 401 Unauthorized + 예외 메시지
+     */
+    @ExceptionHandler(LoginRequiredException.class)
+    public ResponseEntity<String> handleLoginRequired(LoginRequiredException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
+
+    /**
+     * 사용자가 입력한 비밀번호가 저장된 비밀번호와 일치하지 않을 때 발생하는 예외입니다.
+     *
+     * 인증 실패에 해당하므로, HTTP 401 (Unauthorized)를 반환하여
+     * 클라이언트에 인증 실패를 알립니다.
+     *
+     * @param e NotMatchedPasswordException 예외 인스턴스
+     * @return 401 Unauthorized + 예외 메시지
+     */
+    @ExceptionHandler(NotMatchedPasswordException.class)
+    public ResponseEntity<String> handleNotMatchedPassword(NotMatchedPasswordException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    }
+
+    /**
+     * 요청한 댓글이 존재하지 않을 때 발생하는 예외입니다.
+     *
+     * 클라이언트가 존재하지 않는 리소스를 요청한 경우이므로,
+     * HTTP 404 (Not Found)를 반환하여 댓글을 찾을 수 없음을 알립니다.
+     *
+     * @param e CommentNotFoundException 예외 인스턴스
+     * @return 404 Not Found + 예외 메시지
+     */
+    @ExceptionHandler(CommentNotFoundException.class)
+    public ResponseEntity<String> handleCommentNotFound(CommentNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
 }
