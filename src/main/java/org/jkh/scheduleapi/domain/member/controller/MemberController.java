@@ -19,35 +19,35 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping("/members/register")
+    @PostMapping("/member/register")
     public ResponseEntity<MemberResponse> create(@Validated @RequestBody MemberSignUpRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(memberService.signUp(request.memberName(),request.email(),request.password()));
     }
 
-    @GetMapping("/members")
+    @GetMapping("/member")
     public ResponseEntity<MemberResponse> find(@Validated @RequestParam Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.findById(id));
     }
 
-    @GetMapping("members/all")
+    @GetMapping("member/all")
     public ResponseEntity<List<MemberResponse>> findAll(){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.findAll());
     }
 
-    @PutMapping("/members/update/{id}")
+    @PutMapping("/member/update/{id}")
     public ResponseEntity<MemberResponse> update(@Validated @PathVariable long id, @Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.updateMemberName(id, request.memberName()));
     }
 
-    @DeleteMapping("/members/delete/{id}")
+    @DeleteMapping("/member/delete/{id}")
     public ResponseEntity<Void> delete(@Validated @PathVariable long id,@Validated @RequestBody MemberDeleteRequest request){
         memberService.deleteMember(id,request.password());
         return new ResponseEntity<>(HttpStatus.OK);
