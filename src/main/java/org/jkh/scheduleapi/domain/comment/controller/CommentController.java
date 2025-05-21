@@ -22,7 +22,7 @@ public class CommentController {
     public ResponseEntity<CommentResponse> create(@RequestBody CommentRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(commentService.createComment(request.schedule_id(),request.member_id(),request.message()));
+                .body(commentService.createComment(request.scheduleId(),request.memberId(),request.message()));
     }
 
     @GetMapping("/member")
@@ -43,12 +43,12 @@ public class CommentController {
     public ResponseEntity<CommentResponse> update(@RequestBody CommentUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(commentService.updateComment(request.id(), request.schedule_id(),request.member_id(),request.message()));
+                .body(commentService.updateComment(request.id(), request.scheduleId(),request.memberId(),request.message()));
     }
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestBody CommentDeleteRequest request){
-        commentService.deleteComment(request.id(), request.member_id());
+        commentService.deleteComment(request.id(), request.memberId());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

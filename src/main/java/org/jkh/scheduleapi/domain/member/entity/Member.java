@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jkh.scheduleapi.common.entity.BaseDate;
 import org.jkh.scheduleapi.domain.comment.entity.Comment;
 
@@ -25,6 +26,7 @@ public class Member extends BaseDate {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @Setter
     @Column(length = 20, nullable = false)
     private String memberName;
 
@@ -40,7 +42,4 @@ public class Member extends BaseDate {
         this.password = password;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
 }

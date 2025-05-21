@@ -44,7 +44,7 @@ public class MemberController {
     public ResponseEntity<MemberResponse> update(@Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(memberService.updateMemberName(request.id(),request.memberName()));
+                .body(memberService.updateMemberName(request.id(),request.member_name()));
     }
 
     @DeleteMapping("/members")
