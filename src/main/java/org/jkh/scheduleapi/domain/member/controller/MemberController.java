@@ -40,16 +40,16 @@ public class MemberController {
                 .body(memberService.findAll());
     }
 
-    @PutMapping("/members")
-    public ResponseEntity<MemberResponse> update(@Validated @RequestBody MemberUpdateRequest request){
+    @PutMapping("/members/update/{id}")
+    public ResponseEntity<MemberResponse> update(@Validated @PathVariable long id, @Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(memberService.updateMemberName(request.id(),request.member_name()));
+                .body(memberService.updateMemberName(id, request.memberName()));
     }
 
-    @DeleteMapping("/members")
-    public ResponseEntity<Void> delete(@Validated @RequestBody MemberDeleteRequest request){
-        memberService.deleteMember(request.id());
+    @DeleteMapping("/members/delete/{id}")
+    public ResponseEntity<Void> delete(@Validated @PathVariable long id,@Validated @RequestBody MemberDeleteRequest request){
+        memberService.deleteMember(id,request.password());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

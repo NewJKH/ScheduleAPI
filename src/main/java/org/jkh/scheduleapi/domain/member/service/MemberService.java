@@ -41,8 +41,11 @@ public class MemberService {
         return MemberResponse.toDto(member);
     }
 
-    public void deleteMember(Long id){
+    public void deleteMember(Long id, String password){
         Member member = memberRepository.findByIdOrThrow(id);
+        if (!encoder.matches(password,member.getPassword())){
+            throw new NotMatchedPasswordException();
+        }
         memberRepository.delete(member);
     }
 
