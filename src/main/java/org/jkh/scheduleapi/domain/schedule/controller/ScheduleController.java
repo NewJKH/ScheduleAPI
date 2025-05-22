@@ -3,6 +3,7 @@ package org.jkh.scheduleapi.domain.schedule.controller;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleDeleteRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleRequest;
+import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleUpdateRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.service.ScheduleService;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,14 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponse> save(@Validated @RequestBody ScheduleRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.save(request.memberName(),request.title(),request.content()));
+                .body(scheduleService.save(request.getMemberName(),request.getTitle(),request.getContent()));
     }
 
     @GetMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> find(@Validated @RequestParam String username){
+    public ResponseEntity<ScheduleResponse> find(@Validated @RequestParam long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.findByMemberName(username));
+                .body(scheduleService.findById(id));
     }
 
     @GetMapping("/schedule/all")
@@ -41,16 +42,16 @@ public class ScheduleController {
                 .body(scheduleService.findAll(page,size));
     }
 
-    @PutMapping("/schedule")
-    public ResponseEntity<ScheduleResponse> update(@Validated @RequestBody ScheduleRequest request){
+    @PutMapping("/schedule/update/{id}")
+    public ResponseEntity<ScheduleResponse> update(@PathVariable long id, @Validated @RequestBody ScheduleUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(scheduleService.updateSchedule(request.memberName(),request.title(),request.content()));
+                .body(scheduleService.updateSchedule(id,request.getTitle(),request.getContent()));
     }
 
-    @DeleteMapping("/schedule")
-    public ResponseEntity<Void> delete(@Validated @RequestBody ScheduleDeleteRequest request){
-        scheduleService.delete(request.memberName(),request.title());
+    @DeleteMapping("/schedule/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id, @Validated @RequestBody ScheduleDeleteRequest request){
+        scheduleService.delete(id,request.getTitle());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
