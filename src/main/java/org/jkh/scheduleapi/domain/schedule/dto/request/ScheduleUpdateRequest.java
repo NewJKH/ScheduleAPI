@@ -6,7 +6,8 @@ import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
-public class ScheduleDeleteRequest{
-        @Length(min = 1, max = 10)
-        private String title;
+public class ScheduleUpdateRequest {
+    @Length(min = 1, max = 10)
+    private String title;
+    private String content;
 }

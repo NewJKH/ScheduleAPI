@@ -18,7 +18,7 @@ Lv 7 댓글 API 명세서
 | 필드명         | 타입     | 필수 | 설명    |
 |-------------|--------|----|-------|
 | schedule_id | Long   | O  | 일정 번호 |
-| schedule_id | Long   | O  | 회원 번호 |
+| member_id   | Long   | O  | 회원 번호 |
 | message     | String | O  | 댓글    |
 
 ### 요청 예시
@@ -145,7 +145,7 @@ Lv 7 댓글 API 명세서
 | 항목               | 내용                                     |
 | ---------------- |----------------------------------------|
 | **Method**       | `PUT`                                  |
-| **URL**          | `{{url}}/comment`                      |
+| **URL**          | `{{url}}/comment/{id}`                 |
 | **설명**           | ID를 받고 해당 ID 의 작성자가 일치하는 지 확인 후 수정합니다. |
 | **Request Body** | JSON (application/json)                |
 
@@ -159,9 +159,9 @@ Lv 7 댓글 API 명세서
 | message     | String | O  | 내용        |
 
 ### 요청 예시
+    PUT /comment/1
 ```json
 {
-  "id": 1,
   "schedule_id": 1,
   "member_id": 1,
   "message": "홍길은"
@@ -191,7 +191,7 @@ Lv 7 댓글 API 명세서
 | 항목               | 내용                      |
 | ---------------- |-------------------------|
 | **Method**       | `DELETE`                |
-| **URL**          | `{{url}}/comments`      |
+| **URL**          | `{{url}}/comment/1`     |
 | **설명**           | 댓글 ID 를 삭제합니다.          |
 | **Request Body** | JSON (application/json) |
 
@@ -204,9 +204,9 @@ Lv 7 댓글 API 명세서
 
 
 ### 요청 예시
+    POST /comment/1
 ```json
 {
-  "id": 1,
   "member_id": 1
 }
 ```

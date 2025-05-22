@@ -39,16 +39,16 @@ public class CommentController {
                 .body(commentService.getAllCommentsByScheduleId(id));
     }
 
-    @PutMapping
-    public ResponseEntity<CommentResponse> update(@RequestBody CommentUpdateRequest request){
+    @PutMapping("{id}")
+    public ResponseEntity<CommentResponse> update(@PathVariable long id, @RequestBody CommentUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(commentService.updateComment(request.id(), request.scheduleId(),request.memberId(),request.message()));
+                .body(commentService.updateComment(id, request.scheduleId(),request.memberId(),request.message()));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody CommentDeleteRequest request){
-        commentService.deleteComment(request.id(), request.memberId());
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id, @RequestBody CommentDeleteRequest request){
+        commentService.deleteComment(id, request.memberId());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

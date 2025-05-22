@@ -19,37 +19,37 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping("/members/register")
+    @PostMapping("/member/register")
     public ResponseEntity<MemberResponse> create(@Validated @RequestBody MemberSignUpRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(memberService.signUp(request.memberName(),request.email(),request.password()));
     }
 
-    @GetMapping("/members")
+    @GetMapping("/member")
     public ResponseEntity<MemberResponse> find(@Validated @RequestParam Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.findById(id));
     }
 
-    @GetMapping("members/all")
+    @GetMapping("member/all")
     public ResponseEntity<List<MemberResponse>> findAll(){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberService.findAll());
     }
 
-    @PutMapping("/members")
-    public ResponseEntity<MemberResponse> update(@Validated @RequestBody MemberUpdateRequest request){
+    @PutMapping("/member/update/{id}")
+    public ResponseEntity<MemberResponse> update(@PathVariable long id, @Validated @RequestBody MemberUpdateRequest request){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(memberService.updateMemberName(request.id(),request.member_name()));
+                .body(memberService.updateMemberName(id, request.memberName()));
     }
 
-    @DeleteMapping("/members")
-    public ResponseEntity<Void> delete(@Validated @RequestBody MemberDeleteRequest request){
-        memberService.deleteMember(request.id());
+    @DeleteMapping("/member/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id, @Validated @RequestBody MemberDeleteRequest request){
+        memberService.deleteMember(id,request.password());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

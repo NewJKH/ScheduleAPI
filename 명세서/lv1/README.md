@@ -45,21 +45,21 @@ Lv 0 API 명세 및 ERD 작성 - API 명세서
 | 500 | 서버 내부 오류        |
 
 ---
-## 일정 조회 (사용자 이름 기반)
-| 항목         | 내용                                            |
-|--------------|-------------------------------------------------|
-| **Method**   | `GET`                                           |
-| **URL**      | `{{url}}/api/schedule?username=홍길동`          |
-| **설명**     | `username`에 해당하는 사용자의 일정을 조회합니다. |
-| **Request Params** | Query String (`username`)                |
+## 일정 조회 (사용자 번호 기반)
+| 항목         | 내용                             |
+|--------------|--------------------------------|
+| **Method**   | `GET`                          |
+| **URL**      | `{{url}}/api/schedule?id={id}` |
+| **설명**     | `id`에 해당하는 사용자의 일정을 조회합니다.     |
+| **Request Params** | Query String (`username`)      |
 
 ### 자료형
-| 필드명     | 타입     | 필수 | 설명               |
-|------------|----------|------|--------------------|
-| username   | String   | O    | 조회할 사용자 이름   |
+| 필드명 | 타입   | 필수 | 설명          |
+|-----|------|------|-------------|
+| id  | long | O    | 조회할 사용자 아이디 |
 
 ### 요청 예시
-GET /api/schedule?username=홍길동
+GET /api/schedule?id=1
 
 ### 응답 예시
 ```json
@@ -90,24 +90,25 @@ GET /api/schedule?username=홍길동
 
 ---
 ## 일정 수정
-| 항목         | 내용                                             |
-|--------------|--------------------------------------------------|
-| **Method**   | `PUT`                                            |
-| **URL**      | `{{url}}/api/schedule`                           |
-| **설명**     | `member_name`와 `title`에 해당하는 일정을 수정합니다. |
-| **Request Body** | JSON (application/json)                     |
+| 항목         | 내용                                    |
+|--------------|---------------------------------------|
+| **Method**   | `PUT`                                 |
+| **URL**      | `{{url}}/api/schedule/update/{id}`    |
+| **설명**     | `{id}`를 받아 `title`과 `content`를 수정합니다. |
+| **Request Body** | JSON (application/json)               |
 
 ### 자료형
-| 필드명       | 타입     | 필수 | 설명                        |
-|--------------|----------|------|-----------------------------|
-| member_name  | String   | O    | 작성자 이름 (수정 대상 기준) |
-| title        | String   | O    | 일정 제목 (수정 대상 기준)   |
-| content      | String   | O    | 새로 수정할 일정 내용         |
+| 필드명     | 타입     | 필수 | 설명              |
+|---------|--------|------|-----------------|
+| id      | Long   | O    | 작성자 번호 (수정 대상 기준) |
+| title   | String | O    | 일정 제목 |
+| content | String | O    | 새로 수정할 일정 내용    |
 
 ### 요청
+
+PUT /api/schedule/update/1
 ```json
 {
-  "member_name": "홍길동",
   "title": "과제",
   "content": "스프링 복습 완료 및 발표 준비"
 }
@@ -133,23 +134,24 @@ GET /api/schedule?username=홍길동
 
 ---
 ## 일정 삭제
-| 항목         | 내용                                              |
-|--------------|---------------------------------------------------|
-| **Method**   | `DELETE`                                          |
-| **URL**      | `{{url}}/api/schedule`                            |
-| **설명**     | `member_name`와 `title`에 해당하는 일정을 삭제합니다. |
-| **Request Body** | JSON (application/json)                      |
+| 항목         | 내용                                 |
+|--------------|------------------------------------|
+| **Method**   | `DELETE`                           |
+| **URL**      | `{{url}}/api/schedule/delete/{id}` |
+| **설명**     | `id` 와 `title` 에 해당하는 일정을 삭제합니다.   |
+| **Request Body** | JSON (application/json)            |
 
 ### 자료형
-| 필드명       | 타입     | 필수 | 설명                        |
-|--------------|----------|------|-----------------------------|
-| member_name  | String   | O    | 작성자 이름 (삭제 대상 기준) |
-| title        | String   | O    | 일정 제목 (삭제 대상 기준)   |
+| 필드명   | 타입     | 필수 | 설명                |
+|-------|----------|------|-------------------|
+| id    | String   | O    | 작성자 번호 (삭제 대상 기준) |
+| title | String   | O    | 일정 제목 (삭제 대상 기준)  |
 
 ### 요청
+DELETE /api/schedule/delete/1
+
 ```json
 {
-  "member_name": "홍길동",
   "title": "과제"
 }
 ```

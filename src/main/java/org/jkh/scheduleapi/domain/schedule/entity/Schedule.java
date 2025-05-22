@@ -5,10 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.jkh.scheduleapi.common.entity.BaseDate;
-import org.jkh.scheduleapi.domain.comment.entity.Comment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "schedules")
 @Entity
@@ -28,10 +24,6 @@ public class Schedule extends BaseDate {
     private String title;
     @Column(columnDefinition = "longtext", nullable = false)
     private String content;
-
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
-
 
     public Schedule(String memberName, String title, String content) {
         this.memberName = memberName;

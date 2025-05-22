@@ -30,6 +30,11 @@ public class ScheduleService {
         return ScheduleResponse.toDTO(schedule);
     }
 
+    public ScheduleResponse findById(long id) {
+        Schedule schedule = scheduleRepository.findByIdOrThrow(id);
+        return ScheduleResponse.toDTO(schedule);
+    }
+
     public List<ScheduleResponse> findAll(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createAt"));
         return scheduleRepository.findAll(pageable).stream()
@@ -38,16 +43,15 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleResponse updateSchedule(String memberName, String title, String content) {
-        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(memberName);
+    public ScheduleResponse updateSchedule(long id, String title, String content) {
+        Schedule schedule = scheduleRepository.findByIdOrThrow(id);
         schedule.update(title,content);
 
         return ScheduleResponse.toDTO(schedule);
     }
 
-    @Transactional
-    public void delete(String memberName, String title) {
-        Schedule schedule = scheduleRepository.findByMemberNameOrThrow(memberName);
+    public void delete(long id, String title) {
+        Schedule schedule = scheduleRepository.findByIdOrThrow(id);
 
         if ( !schedule.getTitle().equals(title)){
             throw new ScheduleNotMatchedException();
