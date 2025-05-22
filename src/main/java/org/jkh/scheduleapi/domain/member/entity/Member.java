@@ -7,10 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jkh.scheduleapi.common.entity.BaseDate;
-import org.jkh.scheduleapi.domain.comment.entity.Comment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "members")
 @Entity
@@ -32,9 +28,6 @@ public class Member extends BaseDate {
 
     @Email
     private String email;
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
 
     public Member(String memberName, String email, String password) {
         this.memberName = memberName;

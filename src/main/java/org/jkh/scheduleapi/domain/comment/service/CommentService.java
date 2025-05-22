@@ -32,13 +32,13 @@ public class CommentService {
     }
 
     public List<CommentResponse> getAllCommentsByMemberId(Long member_id){
-        return memberRepository.findByIdOrThrow(member_id).getComments().stream()
+        return commentRepository.findByMemberId(member_id).stream()
                 .map(CommentResponse::toDto)
                 .toList();
     }
 
     public List<CommentResponse> getAllCommentsByScheduleId(Long schedule_id){
-        return scheduleRepository.findByIdOrThrow(schedule_id).getComments().stream()
+        return commentRepository.findByScheduleId(schedule_id).stream()
                 .map(CommentResponse::toDto)
                 .toList();
     }
