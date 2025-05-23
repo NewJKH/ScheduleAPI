@@ -1,7 +1,7 @@
 auth:
   whitelist:
     - /login
-    - /api/members/register
+    - /api/member/register
 
 spring:
   datasource:
