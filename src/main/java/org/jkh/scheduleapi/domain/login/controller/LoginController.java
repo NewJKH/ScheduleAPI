@@ -3,9 +3,9 @@ package org.jkh.scheduleapi.domain.login.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.domain.login.dto.request.LoginRequest;
+import org.jkh.scheduleapi.domain.login.dto.response.LoginResponse;
+import org.jkh.scheduleapi.domain.login.service.LoginService;
 import org.jkh.scheduleapi.domain.login.session.SessionService;
-import org.jkh.scheduleapi.domain.member.dto.MemberResponse;
-import org.jkh.scheduleapi.domain.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {
-    private final MemberService memberService;
+    private final LoginService loginService;
     private final SessionService sessionService;
 
-
     @PostMapping
-    public ResponseEntity<MemberResponse> login(@Validated @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
-        MemberResponse memberResponse = memberService.login(request.email(), request.password());
+    public ResponseEntity<LoginResponse> login(@Validated @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        LoginResponse memberResponse = loginService.login(request.email(), request.password());
         sessionService.save(httpRequest, memberResponse);
 
         return ResponseEntity

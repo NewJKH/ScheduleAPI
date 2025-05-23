@@ -1,7 +1,6 @@
 package org.jkh.scheduleapi.domain.member.service;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.jkh.scheduleapi.common.config.PasswordEncoder;
 import org.jkh.scheduleapi.common.exception.login.NotMatchedPasswordException;
@@ -47,13 +46,5 @@ public class MemberService {
             throw new NotMatchedPasswordException();
         }
         memberRepository.delete(member);
-    }
-
-    public MemberResponse login(@Email String email, String password) {
-        Member member = memberRepository.findByEmailOrThrow(email);
-        if (!encoder.matches(password,member.getPassword())){
-            throw new NotMatchedPasswordException();
-        }
-        return MemberResponse.toDto(member);
     }
 }
