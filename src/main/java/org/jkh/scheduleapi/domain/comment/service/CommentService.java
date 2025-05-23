@@ -1,6 +1,7 @@
 package org.jkh.scheduleapi.domain.comment.service;
 
 import lombok.RequiredArgsConstructor;
+import org.jkh.scheduleapi.common.exception.comment.CommentNotFoundException;
 import org.jkh.scheduleapi.common.exception.member.MemberNotFoundException;
 import org.jkh.scheduleapi.common.exception.member.MemberNotMatchedException;
 import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotFoundException;
@@ -43,6 +44,16 @@ public class CommentService {
         return CommentResponse.toDto(commentRepository.findByIdOrThrow(comment.getId()));
     }
 
+    /**
+     * 댓글 ID를 통해 단일 댓글을 조회합니다.
+     *
+     * @param id 댓글 ID
+     * @return 조회된 댓글의 응답 DTO
+     * @throws CommentNotFoundException 해당 댓글이 존재하지 않을 경우
+     */
+    public CommentResponse getCommentById(Long id) {
+        return CommentResponse.toDto(commentRepository.findByIdOrThrow(id));
+    }
     /**
      * 특정 회원이 작성한 모든 댓글을 조회합니다.
      *
@@ -107,4 +118,5 @@ public class CommentService {
         }
         commentRepository.delete(comment);
     }
+
 }

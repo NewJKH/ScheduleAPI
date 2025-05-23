@@ -32,6 +32,20 @@ public class CommentController {
     }
 
     /**
+     * 특정 댓글을 확인 합니다.
+     *
+     * @param id 댓글 ID
+     * @return 댓글 응답 DTO 리스트
+     */
+    @GetMapping("/member")
+    public ResponseEntity<CommentResponse> findById(@RequestParam Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(commentService.getCommentById(id));
+    }
+
+
+    /**
      * 특정 회원이 작성한 댓글 목록을 조회합니다.
      *
      * @param id 회원 ID
