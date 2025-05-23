@@ -37,7 +37,7 @@ public class CommentController {
      * @param id 댓글 ID
      * @return 댓글 응답 DTO 리스트
      */
-    @GetMapping("/member")
+    @GetMapping
     public ResponseEntity<CommentResponse> findById(@RequestParam Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
