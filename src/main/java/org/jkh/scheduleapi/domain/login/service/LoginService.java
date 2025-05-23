@@ -15,6 +15,14 @@ public class LoginService{
     private final MemberRepository memberRepository;
     private final PasswordEncoder encoder;
 
+    /**
+     * 이메일과 비밀번호를 기반으로 사용자를 인증합니다.
+     *
+     * @param email 사용자의 이메일 주소 (유효한 이메일 형식이어야 함)
+     * @param password 사용자의 평문 비밀번호
+     * @return 로그인 성공 시 사용자 이름을 포함한 응답 DTO
+     * @throws NotMatchedPasswordException 비밀번호가 일치하지 않을 경우 예외 발생
+     */
     public LoginResponse login(@Email String email, String password) {
         Member member = memberRepository.findByEmailOrThrow(email);
         if (!encoder.matches(password,member.getPassword())){
