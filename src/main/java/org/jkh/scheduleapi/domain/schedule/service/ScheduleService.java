@@ -1,7 +1,7 @@
 package org.jkh.scheduleapi.domain.schedule.service;
 
 import lombok.RequiredArgsConstructor;
-import org.jkh.scheduleapi.common.exception.member.MemberNotFoundException;
+import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotFoundException;
 import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotMatchedException;
 import org.jkh.scheduleapi.domain.schedule.dto.response.ScheduleResponse;
 import org.jkh.scheduleapi.domain.schedule.entity.Schedule;
@@ -38,7 +38,7 @@ public class ScheduleService {
      *
      * @param memberName 작성자 이름
      * @return 일정 응답 DTO
-     * @throws MemberNotFoundException 해당 작성자의 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 작성자의 일정이 없을 경우
      *
      * @deprecated 이제 findById()를 사용하세요.
      */
@@ -53,7 +53,7 @@ public class ScheduleService {
      *
      * @param id 일정 ID
      * @return 일정 응답 DTO
-     * @throws MemberNotFoundException 해당 ID의 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 ID의 일정이 없을 경우
      */
     public ScheduleResponse findById(long id) {
         Schedule schedule = scheduleRepository.findByIdOrThrow(id);
@@ -81,7 +81,7 @@ public class ScheduleService {
      * @param title 수정할 제목
      * @param content 수정할 내용
      * @return 수정된 일정의 응답 DTO
-     * @throws MemberNotFoundException 해당 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 일정이 없을 경우
      */
     @Transactional
     public ScheduleResponse updateSchedule(long id, String title, String content) {
@@ -96,7 +96,7 @@ public class ScheduleService {
      * @param id 일정 ID
      * @param title 검증할 제목
      * @throws ScheduleNotMatchedException 제목이 일치하지 않을 경우
-     * @throws MemberNotFoundException 해당 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 일정이 없을 경우
      */
     public void delete(long id, String title) {
         Schedule schedule = scheduleRepository.findByIdOrThrow(id);

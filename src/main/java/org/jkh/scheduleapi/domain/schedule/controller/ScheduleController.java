@@ -1,7 +1,7 @@
 package org.jkh.scheduleapi.domain.schedule.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jkh.scheduleapi.common.exception.member.MemberNotFoundException;
+import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotFoundException;
 import org.jkh.scheduleapi.common.exception.schedule.ScheduleNotMatchedException;
 import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleDeleteRequest;
 import org.jkh.scheduleapi.domain.schedule.dto.request.ScheduleRequest;
@@ -39,7 +39,7 @@ public class ScheduleController {
      *
      * @param id 일정 ID
      * @return 일정 응답 DTO
-     * @throws MemberNotFoundException 해당 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 일정이 없을 경우
      */
     @GetMapping("/schedule")
     public ResponseEntity<ScheduleResponse> find(@Validated @RequestParam long id) {
@@ -70,7 +70,7 @@ public class ScheduleController {
      * @param id 수정할 일정 ID
      * @param request 일정 수정 요청 정보 (제목, 내용)
      * @return 수정된 일정의 응답 DTO
-     * @throws MemberNotFoundException 해당 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 일정이 없을 경우
      */
     @PutMapping("/schedule/update/{id}")
     public ResponseEntity<ScheduleResponse> update(@PathVariable long id, @Validated @RequestBody ScheduleUpdateRequest request) {
@@ -86,7 +86,7 @@ public class ScheduleController {
      * @param request 일정 삭제 요청 정보 (제목)
      * @return HTTP 200 OK (본문 없음)
      * @throws ScheduleNotMatchedException 제목이 일치하지 않을 경우
-     * @throws MemberNotFoundException 해당 일정이 없을 경우
+     * @throws ScheduleNotFoundException 해당 일정이 없을 경우
      */
     @DeleteMapping("/schedule/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable long id, @Validated @RequestBody ScheduleDeleteRequest request) {
