@@ -7,7 +7,7 @@ import org.jkh.scheduleapi.common.exception.member.MemberNotFoundException;
 import org.jkh.scheduleapi.domain.login.dto.request.LoginRequest;
 import org.jkh.scheduleapi.domain.login.dto.response.LoginResponse;
 import org.jkh.scheduleapi.domain.login.service.LoginService;
-import org.jkh.scheduleapi.domain.login.session.SessionService;
+import org.jkh.scheduleapi.domain.login.session.LoginSessionManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginService loginService;
-    private final SessionService sessionService;
+    private final LoginSessionManager sessionService;
 
     /**
      * 로그인 요청을 처리합니다.
