@@ -6,7 +6,7 @@ import org.jkh.scheduleapi.domain.login.dto.response.LoginResponse;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SessionService {
+public class LoginSessionManager {
     public void save(HttpServletRequest httpRequest, LoginResponse loginResponse) {
         HttpSession session = httpRequest.getSession();
         session.setAttribute("loginMember", loginResponse);
