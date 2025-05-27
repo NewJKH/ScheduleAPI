@@ -1,6 +1,6 @@
 auth:
   whitelist:
-    - /login
+    - /login/**
     - /api/member/register
 
 spring:
